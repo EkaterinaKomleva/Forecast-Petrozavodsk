@@ -1,0 +1,12 @@
+<form>
+  <select
+    #select
+    class="custom-select col-md-3"
+    (change)="onOptionChange(select)">
+    <option
+      [value]="option.value"
+      *ngFor="let option of selectOptions">
+      {{option.date}}
+    </option>
+  </select>
+</form>
