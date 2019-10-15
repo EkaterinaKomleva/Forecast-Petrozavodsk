@@ -1,0 +1,13 @@
+.charts_container {
+  margin-bottom: 200px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .container {
+    width: 550px;
+    height: 350px;
+    margin: 20px;
+    background-color: aqua;
+  }
+}

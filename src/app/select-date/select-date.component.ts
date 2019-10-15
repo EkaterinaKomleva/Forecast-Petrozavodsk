@@ -11,11 +11,11 @@ export class SelectDateComponent implements OnInit {
   @Output() nameOfDay = new EventEmitter<string>();
 
   selectOptions = [
-    {date: moment(new Date()).format('MMMM Do').slice(0, -2), value: 1},
-    {date: moment(new Date()).add(1, 'days').format('MMMM Do').slice(0, -2), value: 2},
-    {date: moment(new Date()).add(2, 'days').format('MMMM Do').slice(0, -2), value: 3},
-    {date: moment(new Date()).add(3, 'days').format('MMMM Do').slice(0, -2), value: 4},
-    {date: moment(new Date()).add(4, 'days').format('MMMM Do').slice(0, -2), value: 5}
+    {date: moment(new Date()).add(3, 'hours').format('MMMM Do').slice(0, -2), value: 1},
+    {date: moment(new Date()).add(1, 'days').add(3, 'hours').format('MMMM Do').slice(0, -2), value: 2},
+    {date: moment(new Date()).add(2, 'days').add(3, 'hours').format('MMMM Do').slice(0, -2), value: 3},
+    {date: moment(new Date()).add(3, 'days').add(3, 'hours').format('MMMM Do').slice(0, -2), value: 4},
+    {date: moment(new Date()).add(4, 'days').add(3, 'hours').format('MMMM Do').slice(0, -2), value: 5}
   ];
 
   day: string;

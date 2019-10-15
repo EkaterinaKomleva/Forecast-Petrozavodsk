@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -8,8 +8,7 @@ import { Chart } from 'angular-highcharts';
 })
 export class ChartManagementComponent implements OnInit {
 
-  name: string;
-  chart: Chart;
+  @Input() chart: Chart;
 
   constructor() { }
 
