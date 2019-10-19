@@ -1,13 +1,12 @@
-.charts_container {
+.container {
   margin-bottom: 200px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 
-  .container {
-    width: 550px;
-    height: 350px;
+  .chart {
+    width: 500px;
+    height: 320px;
     margin: 20px;
-    background-color: aqua;
   }
 }

@@ -9,6 +9,7 @@ export interface DayI {
   time: string[];
   temperature: number[];
   humidity: number[];
+  precipitation: string[];
   wind: number[];
   order: number;
 }

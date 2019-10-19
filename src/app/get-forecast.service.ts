@@ -10,6 +10,7 @@ export class GetForecastService {
   private metric = 'metric';
   private MY_KEY = '69a8a25ac72c1b683cf93ac166329be8';
   private language = 'ru';
+  // private timezone = '10800';
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +20,10 @@ export class GetForecastService {
       units: this.metric,
       APPID: this.MY_KEY,
       lang: this.language,
+      // timezone: this.timezone
     };
     return this.http.get(`http://api.openweathermap.org/data/2.5/forecast`, { params });
   }
 }
+
+// прокинула таймзону, пока не знаю работает или нет, вообще ответа с сервера не получаю

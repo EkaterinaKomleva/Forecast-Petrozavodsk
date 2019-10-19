@@ -1,8 +1,10 @@
 <app-select-date (nameOfDay)="onChooseDay($event)"></app-select-date>
-<div class="charts_container">
+<div class="container">
   <div *ngFor="let item of charts">
-    <app-chart-management>
-      <div class="container"></div>
+    <app-chart-management (chartType)="onChangeChartType($event)">
+      <div class="chart" [chart]="item"></div>
     </app-chart-management>
   </div>
 </div>
+
+  

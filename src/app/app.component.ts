@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
 
   daysParams: DayI[];
   day: DayI;
-
   charts: Chart[] = [];
+  // type: string;
 
   constructor(
     private highchartsService: HighchartsService,
@@ -37,9 +37,16 @@ export class AppComponent implements OnInit {
   }
 
   getCharts(day: DayI) {
-    this.charts.push(this.highchartsService.getChart(day.date, day.temperature, 'Average daily temperature', 'Temperature'));
-    this.charts.push(this.highchartsService.getChart(day.date, day.humidity, 'Humidity', 'Humidity'));
-    this.charts.push(this.highchartsService.getChart(day.date, day.wind, 'Wind speed', 'Wind'));
+    this.charts = [];
+    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind speed, m/s', 'Wind'));
     console.log(this.charts);
+  }
+
+  onChangeChartType(type) {
+    // this.type = type;
+    // this.highchartsService.
   }
 }

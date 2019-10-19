@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { HighchartsService } from '../highcharts.service';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -8,11 +9,14 @@ import { Chart } from 'angular-highcharts';
 })
 export class ChartManagementComponent implements OnInit {
 
-  @Input() chart: Chart;
+  @Output() chartType = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private highchartsService: HighchartsService) { }
 
   ngOnInit() {
   }
 
+  onEmitChartType(type) {
+    this.chartType.emit(type);
+  }
 }

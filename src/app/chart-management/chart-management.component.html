@@ -1,1 +1,27 @@
+<form class="row">
+  <div id="button-row">
+    <button
+      type="button"
+      class="line-chart btn btn-outline-dark"
+      (click)="onEmitChartType('line')">
+      <i class="fa fa-line-chart"></i>
+    </button>
+    <button
+      type="button"
+      class="column-chart btn btn-outline-dark"
+      (click)="onEmitChartType('column')">
+      <i class="fa fa-bar-chart"></i>
+    </button>
+    <button
+      type="button"
+      class="area-chart btn btn-outline-dark"
+      (click)="onEmitChartType('area')">
+      <i class="fa fa-area-chart"></i>
+    </button>
+    </div>
+  <select class="form-control form-control-sm col-3 m-1">
+    <option [value]=""></option>
+  </select>
+</form>
+<hr>
 <ng-content></ng-content>
