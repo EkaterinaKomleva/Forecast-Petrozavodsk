@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   daysParams: DayI[];
   day: DayI;
   charts: Chart[] = [];
-  // type: string;
 
   constructor(
     private highchartsService: HighchartsService,
@@ -26,13 +25,11 @@ export class AppComponent implements OnInit {
       .subscribe((response: ResponseI) => {
         this.daysParams = this.highchartsService.getForecastParams(response.list);
         this.getCharts(this.daysParams[0]);
-        // console.log(this.daysParams);
       });
   }
 
   onChooseDay(event) {
     this.day = this.daysParams.find((day: DayI) => day.date.includes(event.trim()));
-    // console.log(this.day);
     this.getCharts(this.day);
   }
 
@@ -45,8 +42,8 @@ export class AppComponent implements OnInit {
     console.log(this.charts);
   }
 
-  onChangeChartType(type) {
-    // this.type = type;
-    // this.highchartsService.
+  onChangeChartType(type, chartTitle) {
+    const currentChart = this.charts.find((chart: any) => chart.options.title.text === chartTitle);
+    this.highchartsService.changeType(currentChart, type);
   }
 }

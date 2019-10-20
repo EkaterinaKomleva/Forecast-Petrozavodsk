@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HighchartsService } from '../highcharts.service';
-import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-chart-management',

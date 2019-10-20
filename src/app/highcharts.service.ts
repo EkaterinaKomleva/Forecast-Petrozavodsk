@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { DayI } from './interfaces.service';
 import * as moment from 'moment';
-import { chart } from 'highcharts';
 
 @Injectable({
   providedIn: 'root'
@@ -103,11 +102,8 @@ export class HighchartsService {
   }
 
   changeType(currentChart: any, seriesType) {
-    console.log(currentChart);
-    currentChart.update({
-      series: [{
-        type: seriesType
-      }]
-    });
+    currentChart.options.series[0].update({
+      type: seriesType
+  });
   }
 }
