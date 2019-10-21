@@ -15,7 +15,6 @@ export class HighchartsService {
     humidity: [],
     precipitation: [],
     wind: [],
-    order: 0
   };
 
   params: DayI[] = [];
@@ -23,7 +22,7 @@ export class HighchartsService {
 
   constructor() { }
 
-  getChart(hours, values, text, title): Chart {
+  getChart(time, values, text, title, chartType): Chart {
     return new Chart({
       title: {
         text: title
@@ -32,7 +31,7 @@ export class HighchartsService {
         text: 'Source: openweathermap.org'
       },
       xAxis: {
-        categories: hours
+        categories: time
       },
       yAxis: {
         title: {
@@ -51,8 +50,8 @@ export class HighchartsService {
         }
       },
       series: [{
-        type: 'area',
-        name: 'Петрозаводск',
+        type: chartType,
+        name: text.split(',')[0],
         data: values
       }]
     });
@@ -66,7 +65,6 @@ export class HighchartsService {
       const __date = this.getDate(item.dt_txt);
 
       if (this.day.date !== __date) {
-        this.day.order += 1;
         this.params.push(this.day);
         this.day = JSON.parse(JSON.stringify(this.day));
         this.day.date = this.getDate(item.dt_txt);
@@ -101,9 +99,7 @@ export class HighchartsService {
     return moment.utc(item).utcOffset(180).format('H:mm');
   }
 
-  changeType(currentChart: any, seriesType) {
-    currentChart.options.series[0].update({
-      type: seriesType
-  });
-  }
+  // addChartSeries(currentChart, series): void {
+  //   currentChart.addSeries(series);
+  // }
 }

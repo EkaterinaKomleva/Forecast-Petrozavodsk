@@ -18,8 +18,6 @@ export class SelectDateComponent implements OnInit {
     {date: moment(new Date()).add(4, 'days').add(3, 'hours').format('MMMM D'), value: 4}
   ];
 
-  day: string;
-
   constructor() { }
 
   ngOnInit() {
@@ -28,8 +26,7 @@ export class SelectDateComponent implements OnInit {
 
   onOptionChange(selectElem: HTMLSelectElement) {
     const day = selectElem[+selectElem.value].innerHTML;
-    this.day = day;
-    this.nameOfDay.emit(this.day);
+    this.nameOfDay.emit(day);
   }
 
 }

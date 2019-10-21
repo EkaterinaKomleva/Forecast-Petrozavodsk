@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HighchartsService } from '../highcharts.service';
 
 @Component({
@@ -8,7 +8,9 @@ import { HighchartsService } from '../highcharts.service';
 })
 export class ChartManagementComponent implements OnInit {
 
+  @Input() optionsForChart: string[];
   @Output() chartType = new EventEmitter<string>();
+  @Output() selectValue = new EventEmitter<string>();
 
   constructor(private highchartsService: HighchartsService) { }
 
@@ -17,5 +19,9 @@ export class ChartManagementComponent implements OnInit {
 
   onEmitChartType(type) {
     this.chartType.emit(type);
+  }
+
+  onOptionChange(selectElem: HTMLSelectElement) {
+    this.selectValue.emit(selectElem.value);
   }
 }

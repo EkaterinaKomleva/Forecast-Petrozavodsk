@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   daysParams: DayI[];
   day: DayI;
   charts: Chart[] = [];
+  optionsForChart: string[];
+  // selectOption: string;
 
   constructor(
     private highchartsService: HighchartsService,
@@ -25,6 +27,7 @@ export class AppComponent implements OnInit {
       .subscribe((response: ResponseI) => {
         this.daysParams = this.highchartsService.getForecastParams(response.list);
         this.getCharts(this.daysParams[0]);
+        this.getSelectOptionsForChart();
       });
   }
 
@@ -35,15 +38,40 @@ export class AppComponent implements OnInit {
 
   getCharts(day: DayI) {
     this.charts = [];
-    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind speed, m/s', 'Wind'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature', 'area'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity', 'area'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation', 'area'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind', 'area'));
     console.log(this.charts);
   }
 
-  onChangeChartType(type, chartTitle) {
-    const currentChart = this.charts.find((chart: any) => chart.options.title.text === chartTitle);
-    this.highchartsService.changeType(currentChart, type);
+  onChangeChartType(type, currentChart) {
+    const properties = [
+      currentChart.options.xAxis.categories,
+      currentChart.options.series[0].data,
+      currentChart.options.series[0].name,
+      currentChart.options.title.text,
+      type
+    ];
+    this.charts.forEach((chart: any, index) => {
+      if (chart.options.title.text === currentChart.options.title.text) {
+        this.charts[index] = (this.highchartsService.getChart as any)(...properties);
+      }
+    });
+    console.log(this.charts);
+    return this.charts;
+  }
+
+  getSelectOptionsForChart() {
+    this.optionsForChart = this.charts.map((chart: any) => chart.options.yAxis.title.text);
+    // console.log(this.optionsForChart);
+  }
+
+  onChartAddSeries(option, currentChart) {
+    const sourseChart: any = this.charts.find((chart: any) => chart.options.yAxis.title.text === option);
+    const series = sourseChart.options.series[0].data;
+    series.name = sourseChart.options.series[0].name;
+    console.log(series);
+    // this.highchartsService.addChartSeries(currentChart, series);
   }
 }

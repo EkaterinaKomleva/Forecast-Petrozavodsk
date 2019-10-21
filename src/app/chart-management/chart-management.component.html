@@ -19,8 +19,15 @@
       <i class="fa fa-area-chart"></i>
     </button>
     </div>
-  <select class="form-control form-control-sm col-3 m-1">
-    <option [value]=""></option>
+  <select
+    #select
+    class="form-control form-control-sm col-4 m-1"
+    (change)="onOptionChange(select)">
+    <option
+      *ngFor="let option of optionsForChart"
+      [value]="option">
+      {{option}}
+    </option>
   </select>
 </form>
 <hr>

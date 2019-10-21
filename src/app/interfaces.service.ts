@@ -5,14 +5,15 @@ export interface ResponseI {
 }
 export interface DayI {
   date: string;
-  // values: string[];
   time: string[];
   temperature: number[];
   humidity: number[];
   precipitation: string[];
   wind: number[];
-  order: number;
 }
+
+// export interface PropertiesI
+
 
 @Injectable({
   providedIn: 'root'
