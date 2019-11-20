@@ -52,13 +52,14 @@ export class HighchartsService {
       series: [{
         type: chartType,
         name: text.split(',')[0],
-        data: values
+        data: values,
+        // color: chartColor
       }]
     });
   }
 
   getForecastParams(data) {
-    console.log(data);
+    // console.log(data);
     this.day.date = this.getDate(data[0].dt_txt);
 
     data.forEach(item => {

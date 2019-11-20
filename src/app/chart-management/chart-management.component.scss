@@ -8,9 +8,63 @@ form {
     margin: 1px;
   }
 
-  select {
+  .dropdown {
     height: 26px;
-    margin: 1px 0 0 10px !important;
+    width: 150px;
+    margin: 1px 0 0 10px;
+    outline: none;
     border: 1px solid #343a40;
+    border-radius: .25rem;
+    cursor: pointer;
+    z-index: 1;
+
+    .select-container {
+      display: flex;
+      justify-content: space-between;
+
+      pre {
+        margin-bottom: 1px;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      .fa-sort-down {
+        margin: 1px 5px 0 0;
+      }
+    }
+
+    .dropdown-body {
+      display: none;
+      margin-left: -1px;
+      // border: 1px solid #343a40;
+      // border-radius: .25rem;
+
+      .dropdown-item {
+        height: 26px;
+        width: 150px;
+        border-bottom: 1px;
+        border-right: 1px;
+        border-left: 1px;
+        border-style: solid;
+        border-color: #343a40;
+        padding: 0 10px;
+        background-color: #FFF;
+      }
+
+      .dropdown-item:hover {
+        background-color: #343a40;
+        color: #FFF;
+      }
+    }
   }
+
+  // select {
+  //   height: 26px;
+  //   margin: 1px 0 0 10px !important;
+  //   border: 1px solid #343a40;
+  // }
+
+  // .active {
+  //   background: #999 !important;
+  // }
 }

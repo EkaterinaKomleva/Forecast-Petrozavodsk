@@ -12,7 +12,11 @@ export interface DayI {
   wind: number[];
 }
 
-// export interface PropertiesI
+export interface ButtonI {
+  type: string;
+  icon: string;
+  active: boolean;
+}
 
 
 @Injectable({

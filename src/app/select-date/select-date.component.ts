@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import * as moment from 'moment';
+import { ButtonI } from '../interfaces.service';
 
 @Component({
   selector: 'app-select-date',
@@ -8,7 +9,10 @@ import * as moment from 'moment';
 })
 export class SelectDateComponent implements OnInit {
 
+  @Input() buttons: ButtonI[];
+
   @Output() nameOfDay = new EventEmitter<string>();
+  @Output() refreshedButtons = new EventEmitter<ButtonI[]>();
 
   selectOptions = [
     {date: moment(new Date()).add(3, 'hours').format('MMMM D'), value: 0},
@@ -27,6 +31,13 @@ export class SelectDateComponent implements OnInit {
   onOptionChange(selectElem: HTMLSelectElement) {
     const day = selectElem[+selectElem.value].innerHTML;
     this.nameOfDay.emit(day);
+    this.buttons.map((button, index) => {
+      if (index === 2) {
+        button.active = true;
+      } else {
+        button.active = false;
+      }
+    });
   }
 
 }

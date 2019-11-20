@@ -1,25 +1,38 @@
 <form class="row">
-  <div id="button-row">
     <button
+      *ngFor="let button of buttons"
       type="button"
-      class="line-chart btn btn-outline-dark"
-      (click)="onEmitChartType('line')">
-      <i class="fa fa-line-chart"></i>
+      class="btn btn-outline-dark"
+      (click)="onEmitChartType(button.type, button)"
+      [ngClass]="{'active': button.active}">
+      <i class={{button.icon}}></i>
     </button>
-    <button
+    <!-- <button
       type="button"
-      class="column-chart btn btn-outline-dark"
-      (click)="onEmitChartType('column')">
+      class="btn btn-outline-dark"
+      (click)="onEmitChartType('line')"
+      [ngClass]="{'active': isLine}">
       <i class="fa fa-bar-chart"></i>
-    </button>
-    <button
-      type="button"
-      class="area-chart btn btn-outline-dark"
-      (click)="onEmitChartType('area')">
-      <i class="fa fa-area-chart"></i>
-    </button>
+    </button> -->
+
+  <div
+    class="dropdown"
+    tabindex="1"
+    (click)="onShowOrHideDropdown(dropdown)">
+    <div class="select-container">
+      <pre>  Select chart</pre>
+      <i class="fas fa-sort-down"></i>
     </div>
-  <select
+    <div class="dropdown-body" #dropdown>
+      <div
+        class="dropdown-item"
+        *ngFor="let option of optionsForChart"
+        (click)="onSelectItem()">
+        {{option}}
+      </div>
+    </div>
+  </div>
+  <!-- <select
     #select
     class="form-control form-control-sm col-4 m-1"
     (change)="onOptionChange(select)">
@@ -28,7 +41,7 @@
       [value]="option">
       {{option}}
     </option>
-  </select>
+  </select> -->
 </form>
 <hr>
 <ng-content></ng-content>

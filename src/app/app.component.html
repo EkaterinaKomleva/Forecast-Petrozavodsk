@@ -1,10 +1,16 @@
-<app-select-date (nameOfDay)="onChooseDay($event)"></app-select-date>
+<app-select-date
+  (nameOfDay)="onChooseDay($event)"
+  [buttons]="buttons">
+</app-select-date>
 <div class="container">
   <div *ngFor="let item of charts">
     <app-chart-management
-      (chartType)="onChangeChartType($event, item)"
-      (selectValue)="onChartAddSeries($event, item)"
-      [optionsForChart]="optionsForChart">
+      (chartType)="onChangeChart($event, item)"
+      (buttonsConfig)="onActivateButton($event)"
+      (currentButton)="getCurrentButton($event)"
+      (selectValue)="onAddChart($event, item)"
+      [optionsForChart]="optionsForChart"
+      [refreshedButtons]="buttons">
       <div class="chart" [chart]="item"></div>
     </app-chart-management>
   </div>

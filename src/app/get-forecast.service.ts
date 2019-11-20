@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import MockData from './mock-data';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,6 @@ export class GetForecastService {
       // timezone: this.timezone
     };
     return this.http.get(`http://api.openweathermap.org/data/2.5/forecast`, { params });
+    return of(MockData);
   }
 }
-
-// прокинула таймзону, пока не знаю работает или нет, вообще ответа с сервера не получаю
