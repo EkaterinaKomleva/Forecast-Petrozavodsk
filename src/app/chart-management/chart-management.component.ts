@@ -12,9 +12,9 @@ export class ChartManagementComponent implements OnInit {
   @Input() optionsForChart: string[];
   @Input() set refreshedButtons(data: ButtonI[]) {
     if (!data.length) { return; }
-    // console.log(data);
     this.buttons = data;
   }
+
   @Output() chartType = new EventEmitter<string>();
   @Output() buttonsConfig = new EventEmitter<ButtonI[]>();
   @Output() currentButton = new EventEmitter<ButtonI>();
@@ -42,20 +42,8 @@ export class ChartManagementComponent implements OnInit {
     this.buttonsConfig.emit(this.buttons);
   }
 
-  onEmitChartType(type, button) {
-    // console.log(type);
-
-    // const bar = [...this.buttons];
-    // this.buttons = [];
-
-    // this.buttons = JSON.parse(JSON.stringify(this));
-    // const newButtons = this.buttons.map((button: ButtonI) => Object.assign({}, button));
-    // this.buttons = [];
-    // this.buttons = newButtons;
-
-    // this.onUpdateButtons();
+  onEmitChartTypeAndButton(type, button) {
     this.chartType.emit(type);
-    // this.buttonsConfig.emit(this.buttons);
     this.currentButton.emit(button);
     this.changeDetection.detectChanges();
   }

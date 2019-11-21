@@ -6,7 +6,7 @@
   <div *ngFor="let item of charts">
     <app-chart-management
       (chartType)="onChangeChart($event, item)"
-      (buttonsConfig)="onActivateButton($event)"
+      (buttonsConfig)="getButtons($event)"
       (currentButton)="getCurrentButton($event)"
       (selectValue)="onAddChart($event, item)"
       [optionsForChart]="optionsForChart"

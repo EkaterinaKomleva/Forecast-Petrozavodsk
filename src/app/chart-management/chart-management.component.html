@@ -3,18 +3,10 @@
       *ngFor="let button of buttons"
       type="button"
       class="btn btn-outline-dark"
-      (click)="onEmitChartType(button.type, button)"
+      (click)="onEmitChartTypeAndButton(button.type, button)"
       [ngClass]="{'active': button.active}">
       <i class={{button.icon}}></i>
     </button>
-    <!-- <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="onEmitChartType('line')"
-      [ngClass]="{'active': isLine}">
-      <i class="fa fa-bar-chart"></i>
-    </button> -->
-
   <div
     class="dropdown"
     tabindex="1"
@@ -32,16 +24,6 @@
       </div>
     </div>
   </div>
-  <!-- <select
-    #select
-    class="form-control form-control-sm col-4 m-1"
-    (change)="onOptionChange(select)">
-    <option
-      *ngFor="let option of optionsForChart"
-      [value]="option">
-      {{option}}
-    </option>
-  </select> -->
 </form>
 <hr>
 <ng-content></ng-content>

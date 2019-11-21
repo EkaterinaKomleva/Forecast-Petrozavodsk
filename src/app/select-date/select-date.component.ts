@@ -12,7 +12,6 @@ export class SelectDateComponent implements OnInit {
   @Input() buttons: ButtonI[];
 
   @Output() nameOfDay = new EventEmitter<string>();
-  @Output() refreshedButtons = new EventEmitter<ButtonI[]>();
 
   selectOptions = [
     {date: moment(new Date()).add(3, 'hours').format('MMMM D'), value: 0},

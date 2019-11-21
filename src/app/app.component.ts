@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   day: DayI;
   charts: Chart[] = [];
   optionsForChart: string[];
-  currentButton: ButtonI;
   buttons: ButtonI[] = [];
   // selectOption: string;
 
@@ -47,7 +46,6 @@ export class AppComponent implements OnInit {
     this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity', 'area'));
     this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation', 'area'));
     this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind', 'area'));
-    // console.log(this.charts);
   }
 
   onChangeChart(type, currentChart) {
@@ -63,22 +61,17 @@ export class AppComponent implements OnInit {
         this.charts[index] = (this.highchartsService.getChart as any)(...properties);
       }
     });
-    // console.log(this.charts);
   }
 
-  onActivateButton(buttons) {
+  getButtons(buttons) {
     this.buttons = buttons;
-    console.log(this.buttons);
   }
 
   getCurrentButton(currentButton) {
-    this.currentButton = currentButton;
     this.buttons.map(button => {
       button.active = false;
       if (button.type === currentButton.type) { button.active = true; }
-      return button;
     });
-    // console.log(this.buttons);
   }
 
   getSelectOptionsForChart() {
