@@ -1,4 +1,13 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  OnInit,
+  ElementRef,
+} from '@angular/core';
 import { ButtonI } from '../interfaces.service';
 
 @Component({
@@ -14,6 +23,7 @@ export class ChartManagementComponent implements OnInit {
     if (!data.length) { return; }
     this.buttons = data;
   }
+  // @Input() charts: any[];
 
   @Output() chartType = new EventEmitter<string>();
   @Output() buttonsConfig = new EventEmitter<ButtonI[]>();
@@ -35,11 +45,13 @@ export class ChartManagementComponent implements OnInit {
   }];
 
   constructor(
-    private changeDetection: ChangeDetectorRef
+    private changeDetection: ChangeDetectorRef,
+    private element: ElementRef,
     ) { }
 
   ngOnInit() {
     this.buttonsConfig.emit(this.buttons);
+    // console.log(this.charts);
   }
 
   onEmitChartTypeAndButton(type, button) {
@@ -70,8 +82,10 @@ export class ChartManagementComponent implements OnInit {
     }
   }
 
-  onSelectItem() {
-    // console.log('');
+  onSelectItem(option) {
+    const sel = this.element.nativeElement;
+    const sel2 = sel.querySelector('pre');
+    sel2.innerText = `  ${option}`;
   }
 
 }

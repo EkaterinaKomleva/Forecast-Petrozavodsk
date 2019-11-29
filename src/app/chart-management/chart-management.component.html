@@ -17,9 +17,10 @@
     </div>
     <div class="dropdown-body" #dropdown>
       <div
+        #currentOption
         class="dropdown-item"
         *ngFor="let option of optionsForChart"
-        (click)="onSelectItem()">
+        (click)="onSelectItem(option)">
         {{option}}
       </div>
     </div>
