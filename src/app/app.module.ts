@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartModule } from 'angular-highcharts';
+import { ColorSketchModule } from 'ngx-color/sketch';
 
 import { AppComponent } from './app.component';
 import { SelectDateComponent } from './select-date/select-date.component';
@@ -22,7 +23,8 @@ import { HighchartsService } from './highcharts.service';
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    ChartModule
+    ChartModule,
+    ColorSketchModule
   ],
   providers: [
     GetForecastService,

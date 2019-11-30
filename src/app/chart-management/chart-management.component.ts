@@ -9,6 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { ButtonI } from '../interfaces.service';
+import { color } from 'highcharts';
 
 @Component({
   selector: 'app-chart-management',
@@ -43,6 +44,8 @@ export class ChartManagementComponent implements OnInit {
     icon: 'fa fa-area-chart',
     active: true
   }];
+
+  isShowColorPicker = false;
 
   constructor(
     private changeDetection: ChangeDetectorRef,
@@ -86,6 +89,14 @@ export class ChartManagementComponent implements OnInit {
     const sel = this.element.nativeElement;
     const sel2 = sel.querySelector('pre');
     sel2.innerText = `  ${option}`;
+  }
+
+  changeComplete(event) {
+    console.log(event);
+  }
+
+  onShowColorPicker(event): void {
+    this.isShowColorPicker = true;
   }
 
 }
