@@ -30,6 +30,7 @@ export class ChartManagementComponent implements OnInit {
   @Output() buttonsConfig = new EventEmitter<ButtonI[]>();
   @Output() currentButton = new EventEmitter<ButtonI>();
   @Output() selectValue = new EventEmitter<string>();
+  @Output() color = new EventEmitter<string>();
 
   buttons: ButtonI[] = [{
     type: 'line',
@@ -45,7 +46,8 @@ export class ChartManagementComponent implements OnInit {
     active: true
   }];
 
-  isShowColorPicker = false;
+  isShowColorPicker: boolean;
+  presetColors: string[] = ['#F74723', '#FF7C0B', '#F4D225', '#7BC25D', '#00BD78', '#45C0D6', '#2582F4', '#3C57FA', '#AF4DFF', '#F04391'];
 
   constructor(
     private changeDetection: ChangeDetectorRef,
@@ -54,6 +56,7 @@ export class ChartManagementComponent implements OnInit {
 
   ngOnInit() {
     this.buttonsConfig.emit(this.buttons);
+    this.isShowColorPicker = false;
     // console.log(this.charts);
   }
 
@@ -92,11 +95,16 @@ export class ChartManagementComponent implements OnInit {
   }
 
   changeComplete(event) {
-    console.log(event);
+    const newColor = event.color.hex;
+    this.color.emit(newColor);
+    console.log(newColor);
   }
 
-  onShowColorPicker(event): void {
+  onShowColorPicker(): void {
     this.isShowColorPicker = true;
+    // const colorPicker = document.createElement('div');
+    // colorPicker.innerHTML = this.template;
+    // document.append(colorPicker);
   }
 
 }

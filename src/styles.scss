@@ -1,5 +1,11 @@
 .color-picker {
-  width: 250px;
-  height: 250px;
   position: absolute;
+  margin: 70px 0;
+  z-index: 100;
 }
+
+.sketch-single {
+  display: none;
+}
+
+

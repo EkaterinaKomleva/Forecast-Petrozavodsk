@@ -5,9 +5,10 @@
 <div class="container">
   <div *ngFor="let item of charts">
     <app-chart-management
-      (chartType)="onChangeChart($event, item)"
+      (chartType)="onChangeChartProp($event, item)"
       (buttonsConfig)="getButtons($event)"
       (currentButton)="getCurrentButton($event)"
+      (color)="onChangeChartProp($event, item)"
       (selectValue)="onAddChart($event, item)"
       [optionsForChart]="optionsForChart"
       [refreshedButtons]="buttons">

@@ -22,7 +22,7 @@ export class HighchartsService {
 
   constructor() { }
 
-  getChart(time, values, text, title, chartType): Chart {
+  getChart(time, values, text, title, chartType, chartColor): Chart {
     return new Chart({
       title: {
         text: title
@@ -53,7 +53,7 @@ export class HighchartsService {
         type: chartType,
         name: text.split(',')[0],
         data: values,
-        // color: chartColor
+        color: chartColor
       }]
     });
   }
@@ -92,11 +92,11 @@ export class HighchartsService {
     // console.log(this.params);
   }
 
-  getDate(item) {
+  private getDate(item) {
     return moment.utc(item).utcOffset(180).format('MMMM D');
   }
 
-  getTime(item) {
+  private getTime(item) {
     return moment.utc(item).utcOffset(180).format('H:mm');
   }
 

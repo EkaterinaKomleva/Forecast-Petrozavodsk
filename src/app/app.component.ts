@@ -17,6 +17,10 @@ export class AppComponent implements OnInit {
   charts: Chart[] = [];
   optionsForChart: string[];
   buttons: ButtonI[] = [];
+  state: {buttonType: string, color: string} = {
+    buttonType: '',
+    color: ''
+  };
   // selectOption: string;
 
   constructor(
@@ -35,27 +39,43 @@ export class AppComponent implements OnInit {
       });
   }
 
-  onChooseDay(event) {
+  onChooseDay(event): void {
     this.day = this.daysParams.find((day: DayI) => day.date.includes(event.trim()));
     this.getCharts(this.day);
   }
 
   getCharts(day: DayI) {
     this.charts = [];
-    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature', 'area'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity', 'area'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation', 'area'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind', 'area'));
+    this.charts.push(this.highchartsService
+      .getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature', 'area', '#9dc8f1'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity', 'area', '#9dc8f1'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation', 'area', '#9dc8f1'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind', 'area', '#9dc8f1'));
   }
 
-  onChangeChart(type, currentChart) {
+  onChangeChartProp(arg, currentChart): void {
     const properties = [
       currentChart.options.xAxis.categories,
       currentChart.options.series[0].data,
       currentChart.options.series[0].name,
       currentChart.options.title.text,
-      type,
+      '',
+      '',
     ];
+
+    if (arg.includes('#')) {
+      properties[5] = arg;
+      this.state.color = arg;
+      if (this.state.buttonType) {
+        properties[4] = this.state.buttonType;
+      }
+    } else {
+      properties[4] = arg;
+      if (this.state.color) {
+        properties[5] = this.state.color;
+      }
+    }
+
     this.charts.forEach((chart: any, index): void => {
       if (chart.options.title.text === currentChart.options.title.text) {
         this.charts[index] = (this.highchartsService.getChart as any)(...properties);
@@ -63,18 +83,19 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getButtons(buttons) {
+  getButtons(buttons): void {
     this.buttons = buttons;
   }
 
-  getCurrentButton(currentButton) {
+  getCurrentButton(currentButton): void {
     this.buttons.map(button => {
       button.active = false;
       if (button.type === currentButton.type) { button.active = true; }
     });
+    this.state.buttonType = currentButton.type;
   }
 
-  getSelectOptionsForChart() {
+  getSelectOptionsForChart(): void {
     this.optionsForChart = this.charts.map((chart: any) => chart.options.yAxis.title.text);
     console.log(this.optionsForChart);
   }
@@ -86,6 +107,6 @@ export class AppComponent implements OnInit {
     series.type = 'column';
     currentChart.options.series.push(series);
     // console.log(currentChart);
-    this.onChangeChart(currentChart.options.series[0].type, currentChart);
+    // this.onChangeChart(currentChart.options.series[0].type, currentChart);
   }
 }

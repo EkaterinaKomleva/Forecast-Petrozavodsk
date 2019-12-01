@@ -26,11 +26,20 @@
     </div>
   </div>
   <button
+    type="button"
     class="btn btn-success color-btn ml-5"
-    (click)="onShowColorPicker($event)">
+    (click)="onShowColorPicker()">
     Change color
   </button>
-  <color-sketch *ngIf="isShowColorPicker" class=".color-picker" color="#00BD78" (onChangeComplete)="changeComplete($event)"></color-sketch>
 </form>
+<color-sketch
+  *ngIf="isShowColorPicker"
+  class="color-picker"
+  [disableAlpha]="true"
+  [width]="'300px'"
+  [presetColors]="presetColors"
+  [color]="'#fff'"
+  (onChangeComplete)="changeComplete($event)">
+</color-sketch>
 <hr>
 <ng-content></ng-content>
