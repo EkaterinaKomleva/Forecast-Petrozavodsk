@@ -17,12 +17,7 @@ export class AppComponent implements OnInit {
   charts: Chart[] = [];
   optionsForChart: string[];
   buttons: ButtonI[] = [];
-  state: {buttonType: string, color: string} = {
-    buttonType: '',
-    color: ''
-  };
-  // selectOption: string;
-
+// selectOption: string;
   constructor(
     private highchartsService: HighchartsService,
     private getForecastService: GetForecastService,
@@ -46,39 +41,31 @@ export class AppComponent implements OnInit {
 
   getCharts(day: DayI) {
     this.charts = [];
-    this.charts.push(this.highchartsService
-      .getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature', 'area', '#9dc8f1'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity', 'area', '#9dc8f1'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation', 'area', '#9dc8f1'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind', 'area', '#9dc8f1'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation'));
+    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind'));
   }
 
   onChangeChartProp(arg, currentChart): void {
-    const properties = [
-      currentChart.options.xAxis.categories,
-      currentChart.options.series[0].data,
-      currentChart.options.series[0].name,
-      currentChart.options.title.text,
-      '',
-      '',
-    ];
+    const properties = {
+      date: currentChart.options.xAxis.categories,
+      time: currentChart.options.series[0].data,
+      name: currentChart.options.series[0].name,
+      title: currentChart.options.title.text,
+      type: currentChart.options.series[0].type,
+      color: currentChart.options.series[0].color,
+    };
 
     if (arg.includes('#')) {
-      properties[5] = arg;
-      this.state.color = arg;
-      if (this.state.buttonType) {
-        properties[4] = this.state.buttonType;
-      }
+      properties.color = arg;
     } else {
-      properties[4] = arg;
-      if (this.state.color) {
-        properties[5] = this.state.color;
-      }
+      properties.type = arg;
     }
 
     this.charts.forEach((chart: any, index): void => {
       if (chart.options.title.text === currentChart.options.title.text) {
-        this.charts[index] = (this.highchartsService.getChart as any)(...properties);
+        this.charts[index] = (this.highchartsService.getChart as any)(...Object.values(properties));
       }
     });
   }
@@ -92,7 +79,6 @@ export class AppComponent implements OnInit {
       button.active = false;
       if (button.type === currentButton.type) { button.active = true; }
     });
-    this.state.buttonType = currentButton.type;
   }
 
   getSelectOptionsForChart(): void {

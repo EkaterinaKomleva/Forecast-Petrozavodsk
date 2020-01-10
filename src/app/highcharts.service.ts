@@ -22,7 +22,7 @@ export class HighchartsService {
 
   constructor() { }
 
-  getChart(time, values, text, title, chartType, chartColor): Chart {
+  getChart(time, values, text, title, chartType = 'area', chartColor = '#9dc8f1'): Chart {
     return new Chart({
       title: {
         text: title
@@ -50,10 +50,10 @@ export class HighchartsService {
         }
       },
       series: [{
-        type: chartType,
+        type: (chartType as any),
         name: text.split(',')[0],
         data: values,
-        color: chartColor
+        color: chartColor,
       }]
     });
   }

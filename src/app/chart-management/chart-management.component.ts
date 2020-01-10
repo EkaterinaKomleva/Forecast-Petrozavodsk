@@ -48,6 +48,10 @@ export class ChartManagementComponent implements OnInit {
 
   isShowColorPicker: boolean;
   presetColors: string[] = ['#F74723', '#FF7C0B', '#F4D225', '#7BC25D', '#00BD78', '#45C0D6', '#2582F4', '#3C57FA', '#AF4DFF', '#F04391'];
+  // state: StateI = {
+  //   buttonType: 'area',
+  //   color: '#9dc8f1'
+  // };
 
   constructor(
     private changeDetection: ChangeDetectorRef,
@@ -57,6 +61,7 @@ export class ChartManagementComponent implements OnInit {
   ngOnInit() {
     this.buttonsConfig.emit(this.buttons);
     this.isShowColorPicker = false;
+    console.log('LOL');
     // console.log(this.charts);
   }
 
