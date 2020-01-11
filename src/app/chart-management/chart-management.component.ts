@@ -46,12 +46,7 @@ export class ChartManagementComponent implements OnInit {
     active: true
   }];
 
-  isShowColorPicker: boolean;
-  presetColors: string[] = ['#F74723', '#FF7C0B', '#F4D225', '#7BC25D', '#00BD78', '#45C0D6', '#2582F4', '#3C57FA', '#AF4DFF', '#F04391'];
-  // state: StateI = {
-  //   buttonType: 'area',
-  //   color: '#9dc8f1'
-  // };
+  isShowColorPicker = false;
 
   constructor(
     private changeDetection: ChangeDetectorRef,
@@ -60,7 +55,6 @@ export class ChartManagementComponent implements OnInit {
 
   ngOnInit() {
     this.buttonsConfig.emit(this.buttons);
-    this.isShowColorPicker = false;
     console.log('LOL');
     // console.log(this.charts);
   }
@@ -93,23 +87,25 @@ export class ChartManagementComponent implements OnInit {
     }
   }
 
-  onSelectItem(option) {
+  onSelectItem(option): void {
     const sel = this.element.nativeElement;
     const sel2 = sel.querySelector('pre');
     sel2.innerText = `  ${option}`;
   }
 
-  changeComplete(event) {
-    const newColor = event.color.hex;
+  onGetColor(newColor: string) {
+    if (!newColor) {
+      this.isShowColorPicker = false;
+      return;
+    }
+
     this.color.emit(newColor);
-    console.log(newColor);
+    this.isShowColorPicker = false;
   }
 
   onShowColorPicker(): void {
+    console.log(this.buttons);
     this.isShowColorPicker = true;
-    // const colorPicker = document.createElement('div');
-    // colorPicker.innerHTML = this.template;
-    // document.append(colorPicker);
   }
 
 }

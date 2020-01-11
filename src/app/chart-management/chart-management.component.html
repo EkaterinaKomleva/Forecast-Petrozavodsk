@@ -32,16 +32,10 @@
     Change color
   </button>
 </form>
-<color-sketch
-  *ngIf="isShowColorPicker"
-  class="color-picker"
-  [disableAlpha]="true"
-  [width]="'300px'"
-  [presetColors]="presetColors"
-  [color]="'#fff'"
-  (onChangeComplete)="changeComplete($event)">
-</color-sketch>
+<app-color-sketch-wrapper
+*ngIf="isShowColorPicker"
+(color)="onGetColor($event)"
+>
+</app-color-sketch-wrapper>
 <hr>
-
-<div></div>
 <ng-content></ng-content>

@@ -12,12 +12,14 @@ import { ChartManagementComponent } from './chart-management/chart-management.co
 import { GetForecastService } from './get-forecast.service';
 import { InterfacesService } from './interfaces.service';
 import { HighchartsService } from './highcharts.service';
+import { ColorSketchWrapperComponent } from './chart-management/color-sketch-wrapper/color-sketch-wrapper/color-sketch-wrapper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SelectDateComponent,
-    ChartManagementComponent
+    ChartManagementComponent,
+    ColorSketchWrapperComponent
   ],
   imports: [
     BrowserModule,

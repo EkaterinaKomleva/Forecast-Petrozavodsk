@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <color-sketch
+    class="color-picker"
+    [disableAlpha]="true"
+    [width]="'300px'"
+    [presetColors]="presetColors"
+    [color]="'#fff'"
+    (onChangeComplete)="changeComplete($event)">
+  </color-sketch>
+  <button class="btn btn-success btn-sm" (click)="onSaveColor()">
+    Save
+  </button>
+</div>
