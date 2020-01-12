@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { HighchartsService } from './highcharts.service';
 import { GetForecastService } from './get-forecast.service';
-import { ResponseI, DayI, ButtonI } from './interfaces.service';
+import { ResponseI, DayI } from './interfaces.service';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -87,15 +87,6 @@ export class AppComponent implements OnInit {
   onGetChartForRendering(option) {
 
   }
-
-  // @HostListener('document:click', ['$event'])
-  // public handleClick(event) {
-  //   if (event.target === ColorSketchWrapperComponent)
-  //   console.log(event.target);
-  //   // {
-  //   //   this.isShowColorPicker = false;
-  //   // }
-  // }
 
   trackByFn(index) {
     return index;

@@ -13,13 +13,15 @@ import { GetForecastService } from './get-forecast.service';
 import { InterfacesService } from './interfaces.service';
 import { HighchartsService } from './highcharts.service';
 import { ColorSketchWrapperComponent } from './chart-management/color-sketch-wrapper/color-sketch-wrapper/color-sketch-wrapper.component';
+import { OutsideClickDirective } from './outside-click.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     SelectDateComponent,
     ChartManagementComponent,
-    ColorSketchWrapperComponent
+    ColorSketchWrapperComponent,
+    OutsideClickDirective
   ],
   imports: [
     BrowserModule,

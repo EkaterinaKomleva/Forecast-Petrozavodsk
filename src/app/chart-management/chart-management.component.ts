@@ -7,7 +7,6 @@ import {
   ChangeDetectionStrategy,
   OnInit,
   ElementRef,
-  HostListener,
 } from '@angular/core';
 import { ButtonI } from '../interfaces.service';
 import { color } from 'highcharts';
@@ -97,12 +96,9 @@ export class ChartManagementComponent implements OnInit {
     this.isShowColorPicker = true;
   }
 
-  // @HostListener('document:click', ['$event'])
-  // public handleClick(event) {
-  //   console.log(event.target);
-  //   // {
-  //   //   this.isShowColorPicker = false;
-  //   // }
-  // }
-
+  onClose(dropdown: HTMLDivElement): void {
+    if (dropdown) {
+      dropdown.style.display = 'none';
+    } else { this.isShowColorPicker = false; }
+  }
 }
