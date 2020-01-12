@@ -1,17 +1,14 @@
 <app-select-date
-  (nameOfDay)="onChooseDay($event)"
-  [buttons]="buttons">
+  (nameOfDay)="onChooseDay($event)">
 </app-select-date>
 <div class="container">
-  <div *ngFor="let item of charts">
+  <div *ngFor="let item of charts; trackBy: trackByFn">
     <app-chart-management
       (chartType)="onChangeChartProp($event, item)"
-      (buttonsConfig)="getButtons($event)"
-      (currentButton)="getCurrentButton($event)"
       (color)="onChangeChartProp($event, item)"
       (selectValue)="onAddChart($event, item)"
       [optionsForChart]="optionsForChart"
-      [refreshedButtons]="buttons">
+      (currentOption)="onGetChartForRendering($event)">
       <div class="chart" [chart]="item"></div>
     </app-chart-management>
   </div>

@@ -7,6 +7,27 @@
       [ngClass]="{'active': button.active}">
       <i class={{button.icon}}></i>
     </button>
+    <!-- <button
+      #line
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="onEmitChartTypeAndButton('line', [line, column, area])">
+      <i class="fa fa-line-chart"></i>
+    </button>
+    <button
+      #column
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="onEmitChartTypeAndButton('column', [column, line, area])">
+      <i class="fa fa-bar-chart"></i>
+    </button>
+    <button
+      #area
+      type="button"
+      class="btn btn-outline-dark active"
+      (click)="onEmitChartTypeAndButton('area', [area, line, column])">
+      <i class="fa fa-area-chart"></i>
+    </button> -->
   <div
     class="dropdown"
     tabindex="1"
@@ -33,9 +54,8 @@
   </button>
 </form>
 <app-color-sketch-wrapper
-*ngIf="isShowColorPicker"
-(color)="onGetColor($event)"
->
+  *ngIf="isShowColorPicker"
+  (color)="onGetColor($event)">
 </app-color-sketch-wrapper>
 <hr>
 <ng-content></ng-content>

@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   OnInit,
   ElementRef,
+  HostListener,
 } from '@angular/core';
 import { ButtonI } from '../interfaces.service';
 import { color } from 'highcharts';
@@ -20,17 +21,11 @@ import { color } from 'highcharts';
 export class ChartManagementComponent implements OnInit {
 
   @Input() optionsForChart: string[];
-  @Input() set refreshedButtons(data: ButtonI[]) {
-    if (!data.length) { return; }
-    this.buttons = data;
-  }
-  // @Input() charts: any[];
 
   @Output() chartType = new EventEmitter<string>();
-  @Output() buttonsConfig = new EventEmitter<ButtonI[]>();
-  @Output() currentButton = new EventEmitter<ButtonI>();
   @Output() selectValue = new EventEmitter<string>();
   @Output() color = new EventEmitter<string>();
+  @Output() currentOption = new EventEmitter<string>();
 
   buttons: ButtonI[] = [{
     type: 'line',
@@ -47,6 +42,7 @@ export class ChartManagementComponent implements OnInit {
   }];
 
   isShowColorPicker = false;
+  isShowChart: boolean; // пока не понятно к какому именно графику применять
 
   constructor(
     private changeDetection: ChangeDetectorRef,
@@ -54,18 +50,10 @@ export class ChartManagementComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.buttonsConfig.emit(this.buttons);
     console.log('LOL');
-    // console.log(this.charts);
   }
 
-  onEmitChartTypeAndButton(type, button) {
-    this.chartType.emit(type);
-    this.currentButton.emit(button);
-    this.changeDetection.detectChanges();
-  }
-
-  onUpdateButtons(type) {
+  onEmitChartTypeAndButton(type) {
     this.buttons.forEach((button: ButtonI) => {
       button.active = false;
 
@@ -73,6 +61,7 @@ export class ChartManagementComponent implements OnInit {
         button.active = true;
       }
     });
+    this.chartType.emit(type);
   }
 
   // onOptionChange(selectElem: HTMLSelectElement) {
@@ -91,6 +80,7 @@ export class ChartManagementComponent implements OnInit {
     const sel = this.element.nativeElement;
     const sel2 = sel.querySelector('pre');
     sel2.innerText = `  ${option}`;
+    this.currentOption.emit(option);
   }
 
   onGetColor(newColor: string) {
@@ -104,8 +94,15 @@ export class ChartManagementComponent implements OnInit {
   }
 
   onShowColorPicker(): void {
-    console.log(this.buttons);
     this.isShowColorPicker = true;
   }
+
+  // @HostListener('document:click', ['$event'])
+  // public handleClick(event) {
+  //   console.log(event.target);
+  //   // {
+  //   //   this.isShowColorPicker = false;
+  //   // }
+  // }
 
 }

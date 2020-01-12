@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { HighchartsService } from './highcharts.service';
 import { GetForecastService } from './get-forecast.service';
 import { ResponseI, DayI, ButtonI } from './interfaces.service';
@@ -16,8 +16,7 @@ export class AppComponent implements OnInit {
   day: DayI;
   charts: Chart[] = [];
   optionsForChart: string[];
-  buttons: ButtonI[] = [];
-// selectOption: string;
+
   constructor(
     private highchartsService: HighchartsService,
     private getForecastService: GetForecastService,
@@ -70,29 +69,35 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getButtons(buttons): void {
-    this.buttons = buttons;
-  }
-
-  getCurrentButton(currentButton): void {
-    this.buttons.map(button => {
-      button.active = false;
-      if (button.type === currentButton.type) { button.active = true; }
-    });
-  }
-
   getSelectOptionsForChart(): void {
-    this.optionsForChart = this.charts.map((chart: any) => chart.options.yAxis.title.text);
+    this.optionsForChart = Object.values(this.charts).map((chart: any) => chart.options.yAxis.title.text);
     console.log(this.optionsForChart);
   }
 
   onAddChart(option, currentChart) {
-    const sourseChart: any = this.charts.find((chart: any) => chart.options.yAxis.title.text === option);
+    const sourseChart: any = Object.values(this.charts).find((chart: any) => chart.options.yAxis.title.text === option);
     const series = sourseChart.options.series[0].data;
     series.name = sourseChart.options.series[0].name;
     series.type = 'column';
     currentChart.options.series.push(series);
     // console.log(currentChart);
     // this.onChangeChart(currentChart.options.series[0].type, currentChart);
+  }
+
+  onGetChartForRendering(option) {
+
+  }
+
+  // @HostListener('document:click', ['$event'])
+  // public handleClick(event) {
+  //   if (event.target === ColorSketchWrapperComponent)
+  //   console.log(event.target);
+  //   // {
+  //   //   this.isShowColorPicker = false;
+  //   // }
+  // }
+
+  trackByFn(index) {
+    return index;
   }
 }
