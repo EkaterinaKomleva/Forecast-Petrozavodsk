@@ -3,13 +3,10 @@ import {
   Output,
   EventEmitter,
   Input,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
   OnInit,
-  ElementRef,
 } from '@angular/core';
-import { ButtonI } from '../interfaces.service';
-import { color } from 'highcharts';
+import { ButtonI } from '../../models/forecastButton';
 
 @Component({
   selector: 'app-chart-management',
@@ -43,13 +40,7 @@ export class ChartManagementComponent implements OnInit {
   isShowColorPicker = false;
   options: string[] = [];
 
-  constructor(
-    private changeDetection: ChangeDetectorRef,
-    private element: ElementRef,
-    ) { }
-
   ngOnInit() {
-    console.log('LOL');
     this.options = this.optionsForChart.slice(0);
     this.getCurrentOptions();
   }
@@ -66,7 +57,7 @@ export class ChartManagementComponent implements OnInit {
     this.chartType.emit(type);
   }
 
-  makeChartOptionsActive(dropdown: HTMLDivElement) {
+  makeChartOptionsActive(dropdown: HTMLDivElement): void {
     Array.from(dropdown.children).forEach(option => {
       option.classList.remove('disabled');
     });
@@ -97,7 +88,7 @@ export class ChartManagementComponent implements OnInit {
     this.currentOption.emit(option);
   }
 
-  onGetColor(newColor: string): undefined {
+  onGetColor(newColor: string): void | undefined {
     if (!newColor) {
       this.isShowColorPicker = false;
       return;

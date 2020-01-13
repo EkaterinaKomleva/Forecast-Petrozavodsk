@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { HighchartsService } from './highcharts.service';
-import { GetForecastService } from './get-forecast.service';
-import { ResponseI, DayI } from './interfaces.service';
+import { HighchartsService } from './services/highcharts.service';
+import { GetForecastService } from './services/get-forecast.service';
+import { ResponseI } from './models/forecastResponse';
+import { DayI } from './models/forecastDay';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
       properties.type = arg;
     }
 
-    this.charts.forEach((chart: any, index): void => {
+    this.charts.forEach((chart: any, index) => {
       if (chart.options.title.text === currentChart.options.title.text) {
         this.charts[index] = (this.highchartsService.getChart as any)(...Object.values(properties));
       }

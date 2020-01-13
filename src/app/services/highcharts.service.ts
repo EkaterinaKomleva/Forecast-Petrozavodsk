@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { DayI } from './interfaces.service';
+import { DayI } from '../interfaces.service';
 import * as moment from 'moment';
 
 @Injectable({
@@ -19,8 +19,6 @@ export class HighchartsService {
 
   params: DayI[] = [];
   paramsForChart: DayI;
-
-  constructor() { }
 
   getChart(time, values, text, title, chartType = 'area', chartColor = '#FF7C0B'): Chart {
     return new Chart({
@@ -58,8 +56,7 @@ export class HighchartsService {
     });
   }
 
-  getForecastParams(data) {
-    // console.log(data);
+  getForecastParams(data): DayI[] {
     this.day.date = this.getDate(data[0].dt_txt);
 
     data.forEach(item => {
@@ -89,18 +86,14 @@ export class HighchartsService {
     }
 
     return this.params;
-    // console.log(this.params);
   }
 
-  private getDate(item) {
+  private getDate(item): string {
     return moment.utc(item).utcOffset(180).format('MMMM D');
   }
 
-  private getTime(item) {
+  private getTime(item): string {
     return moment.utc(item).utcOffset(180).format('H:mm');
   }
 
-  // addChartSeries(currentChart, series): void {
-  //   currentChart.addSeries(series);
-  // }
 }
