@@ -24,7 +24,7 @@ export class GetForecastService {
       lang: this.language,
       // timezone: this.timezone
     };
-    return this.http.get(`http://api.openweathermap.org/data/2.5/forecast`, { params });
+    // return this.http.get(`http://api.openweathermap.org/data/2.5/forecast`, { params });
     return of(MockData);
   }
 }

@@ -3,7 +3,7 @@
       *ngFor="let button of buttons"
       type="button"
       class="btn btn-outline-dark"
-      (click)="onEmitChartTypeAndButton(button.type, button)"
+      (click)="onEmitChartType(button.type, dropdown)"
       [ngClass]="{'active': button.active}">
       <i class={{button.icon}}></i>
     </button>
@@ -21,7 +21,7 @@
         #currentOption
         class="dropdown-item"
         *ngFor="let option of optionsForChart"
-        (click)="onSelectItem(option)">
+        (click)="onSelectItem(option, currentOption)">
         {{option}}
       </div>
     </div>
@@ -29,7 +29,7 @@
   <button
     type="button"
     class="btn btn-success color-btn ml-5"
-    (click)="onShowColorPicker()">
+    (click)="onShowColorPicker(dropdown)">
     Change color
   </button>
 </form>

@@ -51,6 +51,10 @@ form {
         border-color: #343a40;
         padding: 3px 10px;
         background-color: #FFF;
+        .disabled {
+          cursor: none;
+          color: #aaa;
+        }
       }
 
       .dropdown-item:hover {

@@ -38,19 +38,20 @@ export class AppComponent implements OnInit {
     this.getCharts(this.day);
   }
 
-  getCharts(day: DayI) {
-    this.charts = [];
-    this.charts.push(this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation'));
-    this.charts.push(this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind'));
+  getCharts(day: DayI): void {
+    this.charts = [
+      this.highchartsService.getChart(day.time, day.temperature, 'Temperature, ℃', 'Average daily temperature'),
+      this.highchartsService.getChart(day.time, day.humidity, 'Humidity, %', 'Humidity'),
+      this.highchartsService.getChart(day.time, day.precipitation, 'Precipitation, mm', 'Precipitation'),
+      this.highchartsService.getChart(day.time, day.wind, 'Wind, m/s', 'Wind')
+    ];
   }
 
   onChangeChartProp(arg, currentChart): void {
     const properties = {
-      date: currentChart.options.xAxis.categories,
-      time: currentChart.options.series[0].data,
-      name: currentChart.options.series[0].name,
+      time: currentChart.options.xAxis.categories,
+      values: currentChart.options.series[0].data,
+      name: currentChart.options.yAxis.title.text,
       title: currentChart.options.title.text,
       type: currentChart.options.series[0].type,
       color: currentChart.options.series[0].color,
@@ -70,25 +71,23 @@ export class AppComponent implements OnInit {
   }
 
   getSelectOptionsForChart(): void {
-    this.optionsForChart = Object.values(this.charts).map((chart: any) => chart.options.yAxis.title.text);
-    console.log(this.optionsForChart);
+    this.optionsForChart = this.charts.map((chart: any) => chart.options.yAxis.title.text);
   }
 
-  onAddChart(option, currentChart) {
-    const sourseChart: any = Object.values(this.charts).find((chart: any) => chart.options.yAxis.title.text === option);
-    const series = sourseChart.options.series[0].data;
-    series.name = sourseChart.options.series[0].name;
-    series.type = 'column';
-    currentChart.options.series.push(series);
-    // console.log(currentChart);
-    // this.onChangeChart(currentChart.options.series[0].type, currentChart);
+  onGetChartForRendering(option, currentChart): void {
+    this.charts.forEach((chart: any) => {
+      if (chart.options.yAxis.title.text === option) {
+        const newSeries = {
+          type: currentChart.options.series[0].type,
+          name: chart.options.series[0].name,
+          data: chart.options.series[0].data
+        };
+        currentChart.addSeries(newSeries);
+      }
+    });
   }
 
-  onGetChartForRendering(option) {
-
-  }
-
-  trackByFn(index) {
+  trackByFn(index): number {
     return index;
   }
 }

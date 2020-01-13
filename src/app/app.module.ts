@@ -10,7 +10,6 @@ import { SelectDateComponent } from './select-date/select-date.component';
 import { ChartManagementComponent } from './chart-management/chart-management.component';
 
 import { GetForecastService } from './get-forecast.service';
-import { InterfacesService } from './interfaces.service';
 import { HighchartsService } from './highcharts.service';
 import { ColorSketchWrapperComponent } from './chart-management/color-sketch-wrapper/color-sketch-wrapper/color-sketch-wrapper.component';
 import { OutsideClickDirective } from './outside-click.directive';
@@ -32,7 +31,6 @@ import { OutsideClickDirective } from './outside-click.directive';
   ],
   providers: [
     GetForecastService,
-    InterfacesService,
     HighchartsService
   ],
   bootstrap: [AppComponent]

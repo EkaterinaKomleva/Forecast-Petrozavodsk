@@ -6,9 +6,9 @@
     <app-chart-management
       (chartType)="onChangeChartProp($event, item)"
       (color)="onChangeChartProp($event, item)"
-      (selectValue)="onAddChart($event, item)"
       [optionsForChart]="optionsForChart"
-      (currentOption)="onGetChartForRendering($event)">
+      (currentOption)="onGetChartForRendering($event, item)"
+      [item]="item">
       <div class="chart" [chart]="item"></div>
     </app-chart-management>
   </div>

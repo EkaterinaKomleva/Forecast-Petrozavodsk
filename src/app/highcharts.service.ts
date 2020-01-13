@@ -22,7 +22,7 @@ export class HighchartsService {
 
   constructor() { }
 
-  getChart(time, values, text, title, chartType = 'area', chartColor = '#9dc8f1'): Chart {
+  getChart(time, values, text, title, chartType = 'area', chartColor = '#FF7C0B'): Chart {
     return new Chart({
       title: {
         text: title
