@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import MockData from '../mock-data';
-import { of } from 'rxjs';
+// import MockData from '../mock-data';
+// import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,6 @@ export class GetForecastService {
       lang: this.language,
     };
     return this.http.get(`http://api.openweathermap.org/data/2.5/forecast`, { params });
-    return of(MockData);
+    // return of(MockData); // используется, когда не сервер не отвечает
   }
 }

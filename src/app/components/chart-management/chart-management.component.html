@@ -1,35 +1,18 @@
 <form class="row">
+  <div class="buttons-row">
     <button
       *ngFor="let button of buttons"
       type="button"
       class="btn btn-outline-dark"
-      (click)="onEmitChartType(button.type, dropdown)"
+      (click)="onEmitChartType(button.type)"
       [ngClass]="{'active': button.active}">
       <i class={{button.icon}}></i>
     </button>
-  <div
-    (appOutsideClick)="onClose(dropdown)"
-    class="dropdown"
-    tabindex="1"
-    (click)="onShowOrHideDropdown(dropdown)">
-    <div class="select-container">
-      <pre>  Select chart</pre>
-      <i class="fas fa-sort-down"></i>
-    </div>
-    <div class="dropdown-body" #dropdown>
-      <div
-        #currentOption
-        class="dropdown-item"
-        *ngFor="let option of optionsForChart"
-        (click)="onSelectItem(option, currentOption)">
-        {{option}}
-      </div>
-    </div>
   </div>
   <button
     type="button"
-    class="btn btn-success color-btn ml-5"
-    (click)="onShowColorPicker(dropdown)">
+    class="btn btn-success color-btn mr-5"
+    (click)="onShowColorPicker()">
     Change color
   </button>
 </form>

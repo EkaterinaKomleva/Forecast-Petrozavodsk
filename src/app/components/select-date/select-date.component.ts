@@ -18,9 +18,21 @@ export class SelectDateComponent {
     {date: moment(new Date()).add(4, 'days').add(3, 'hours').format('MMMM D'), value: 4}
   ];
 
-  onOptionChange(selectElem: HTMLSelectElement): void {
-    const day = selectElem[+selectElem.value].innerHTML;
+  onOptionChange(day, currentDate: HTMLDivElement): void {
+    console.log(currentDate);
+    currentDate.innerHTML = day;
     this.nameOfDay.emit(day);
   }
 
+  onShowOrHideDropdown(dropdown: HTMLDivElement): void {
+    if (dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
+    } else {
+      dropdown.style.display = 'block';
+    }
+  }
+
+  onClose(dropdown: HTMLDivElement): void {
+    dropdown.style.display = 'none';
+  }
 }

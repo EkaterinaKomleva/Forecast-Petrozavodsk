@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { DayI } from '../interfaces.service';
+import { DayI } from '../models/forecastDay';
 import * as moment from 'moment';
 
 @Injectable({
@@ -51,7 +51,7 @@ export class HighchartsService {
         type: (chartType as any),
         name: text.split(',')[0],
         data: values,
-        color: chartColor,
+        color: chartColor
       }]
     });
   }

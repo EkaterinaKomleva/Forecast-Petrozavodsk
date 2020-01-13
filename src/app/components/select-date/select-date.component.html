@@ -1,12 +1,28 @@
-<form>
-  <select
-    #select
-    class="form-control form-control-sm col-md-3 mt-1 ml-1"
-    (change)="onOptionChange(select)">
-    <option
-      [value]="option.value"
-      *ngFor="let option of selectOptions">
-      {{option.date}}
-    </option>
-  </select>
-</form>
+<div class="selector pt-3 col-12">
+  <div class="block-select">
+    <p>Select date</p>
+    <div
+      (appOutsideClick)="onClose(dropdown)"
+      class="dropdown"
+      tabindex="1"
+      (click)="onShowOrHideDropdown(dropdown)">
+      <div class="select-container">
+        <div class="select-date" #currentDate>
+          {{selectOptions[0].date}}
+        </div>
+        <i class="fas fa-sort-down"></i>
+      </div>
+      <div class="dropdown-body" #dropdown>
+        <div
+          class="dropdown-item"
+          *ngFor="let option of selectOptions"
+          (click)="onOptionChange(option.date, currentDate)">
+          {{option.date}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="title">
+    5 day / 3 hour forecast <span>Petrozavodsk</span>
+  </div>
+</div>

@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   ChangeDetectionStrategy,
-  OnInit,
 } from '@angular/core';
 import { ButtonI } from '../../models/forecastButton';
 
@@ -14,14 +13,12 @@ import { ButtonI } from '../../models/forecastButton';
   styleUrls: ['./chart-management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChartManagementComponent implements OnInit {
+export class ChartManagementComponent {
 
-  @Input() optionsForChart: string[];
   @Input() item;
 
   @Output() chartType = new EventEmitter<string>();
   @Output() color = new EventEmitter<string>();
-  @Output() currentOption = new EventEmitter<string>();
 
   buttons: ButtonI[] = [{
     type: 'line',
@@ -40,13 +37,7 @@ export class ChartManagementComponent implements OnInit {
   isShowColorPicker = false;
   options: string[] = [];
 
-  ngOnInit() {
-    this.options = this.optionsForChart.slice(0);
-    this.getCurrentOptions();
-  }
-
-  onEmitChartType(type, dropdown: HTMLDivElement): void {
-    this.makeChartOptionsActive(dropdown);
+  onEmitChartType(type): void {
     this.buttons.forEach((button: ButtonI) => {
       button.active = false;
 
@@ -55,37 +46,6 @@ export class ChartManagementComponent implements OnInit {
       }
     });
     this.chartType.emit(type);
-  }
-
-  makeChartOptionsActive(dropdown: HTMLDivElement): void {
-    Array.from(dropdown.children).forEach(option => {
-      option.classList.remove('disabled');
-    });
-  }
-
-  onShowOrHideDropdown(dropdown: HTMLDivElement): void {
-    if (dropdown.style.display === 'block') {
-      dropdown.style.display = 'none';
-    } else {
-      dropdown.style.display = 'block';
-    }
-  }
-
-  getCurrentOptions(): void {
-    this.optionsForChart = this.options.slice(0);
-    this.optionsForChart.forEach(option => {
-      if (this.item.options.yAxis.title.text === option) {
-        const index = this.optionsForChart.indexOf(option);
-        if (this.optionsForChart.length === 4) {
-          this.optionsForChart.splice(index, 1);
-        }
-      }
-    });
-  }
-
-  onSelectItem(option, curOption): void {
-    curOption.classList.add('disabled');
-    this.currentOption.emit(option);
   }
 
   onGetColor(newColor: string): void | undefined {
@@ -98,14 +58,11 @@ export class ChartManagementComponent implements OnInit {
     this.isShowColorPicker = false;
   }
 
-  onShowColorPicker(dropdown: HTMLDivElement): void {
-    this.makeChartOptionsActive(dropdown);
+  onShowColorPicker(): void {
     this.isShowColorPicker = true;
   }
 
-  onClose(dropdown: HTMLDivElement): void {
-    if (dropdown) {
-      dropdown.style.display = 'none';
-    } else { this.isShowColorPicker = false; }
+  onClose(): void {
+    this.isShowColorPicker = false;
   }
 }
