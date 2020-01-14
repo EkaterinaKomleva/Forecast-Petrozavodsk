@@ -19,7 +19,6 @@ export class SelectDateComponent {
   ];
 
   onOptionChange(day, currentDate: HTMLDivElement): void {
-    console.log(currentDate);
     currentDate.innerHTML = day;
     this.nameOfDay.emit(day);
   }

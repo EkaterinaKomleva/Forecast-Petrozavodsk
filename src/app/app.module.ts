@@ -13,7 +13,7 @@ import { GetForecastService } from './services/get-forecast.service';
 import { HighchartsService } from './services/highcharts.service';
 import {
   ColorSketchWrapperComponent
-} from './components/chart-management/color-sketch-wrapper/color-sketch-wrapper/color-sketch-wrapper.component';
+} from './components/chart-management/color-sketch-wrapper/color-sketch-wrapper.component';
 import { OutsideClickDirective } from './directives/outside-click.directive';
 
 @NgModule({
