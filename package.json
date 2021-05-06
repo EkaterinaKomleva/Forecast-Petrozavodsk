@@ -21,7 +21,7 @@
     "@angular/router": "~8.2.7",
     "angular-highcharts": "^8.0.3",
     "bootstrap": "^4.3.1",
-    "highcharts": "^7.2.0",
+    "highcharts": "^9.0.0",
     "moment": "^2.24.0",
     "ngx-color": "^4.1.0",
     "rxjs": "~6.4.0",
